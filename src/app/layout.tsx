@@ -11,8 +11,8 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: {
-    default: "Vista Cart",
-    template: "%s | Vista Cart",
+    default: "Art & Crafts",
+    template: "%s | Art & Crafts",
   },
   description: "Developed by the one & only HARSHIT!",
   metadataBase: new URL("https://vista-cart.cleverdevloper.in"),
