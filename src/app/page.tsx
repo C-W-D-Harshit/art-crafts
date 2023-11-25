@@ -1,6 +1,6 @@
 import CategoryHolder from "@/components/holders/CategoryHolder";
 import ProductHolder from "@/components/holders/ProductHolder";
-import Hero from "@/components/pagers/home/Hero";
+import Hero from "@/components/pages/home/Hero";
 
 export default function Home() {
   return (

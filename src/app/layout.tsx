@@ -4,8 +4,9 @@ import "./globals.css";
 import { cn } from "@/lib/utils";
 import Navbar from "@/components/layout/Navbar";
 import { Toaster } from "react-hot-toast";
-import NextTopLoader from "nextjs-toploader";
+
 import MobBar from "@/components/layout/MobBar";
+import TopLoader from "@/components/loaders/TopLoader";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -15,7 +16,7 @@ export const metadata: Metadata = {
     template: "%s | Art & Crafts",
   },
   description: "Developed by the one & only HARSHIT!",
-  metadataBase: new URL("https://vista-cart.cleverdevloper.in"),
+  metadataBase: new URL("https://arts&craft.cleverdevloper.in"),
   alternates: {
     canonical: "/",
     languages: {
@@ -24,17 +25,17 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: {
-      default: "Vista Cart",
-      template: "%s | Vista Cart",
+      default: "Art & Crafts",
+      template: "%s | Art & Crafts",
     },
     description: "Developed by the one & only HARSHIT!",
     images: [
       {
-        url: "https://vista-cart.cleverdevloper.in/og.png",
+        url: "https://arts&crafts.cleverdevloper.in/og.png",
       },
     ],
-    url: "https://vista-cart.cleverdevloper.in/",
-    siteName: "Vista Cart",
+    url: "https://arts&crafts.cleverdevloper.in/",
+    siteName: "Art & Crafts",
     locale: "en_US",
     type: "website",
   },
@@ -58,7 +59,7 @@ export default function RootLayout({
             position="top-center"
             reverseOrder={false}
           />
-          {/* <NextTopLoader showSpinner={false} color="#5c59e8" /> */}
+          <TopLoader />
           <Navbar />
           <div className="flex-grow flex-1">{children}</div>
           <MobBar />
