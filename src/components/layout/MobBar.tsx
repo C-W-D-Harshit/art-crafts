@@ -15,7 +15,7 @@ import React from "react";
 export default function MobBar() {
   const path = usePathname();
   return (
-    <div className="md:hidden flex justify-center bg-white items-center h-16 sticky bottom-0 w-full shadow-[0_3px_10px_rgb(0,0,0,0.2)] rounded-tl-3xl rounded-tr-3xl px-5 py-4 gap-x-8 z-50">
+    <div className="md:hidden flex justify-center bg-white items-center h-[5rem] sticky bottom-0 w-full shadow-[0_3px_10px_rgb(0,0,0,0.2)] rounded-tl-3xl rounded-tr-3xl px-5 py-4 gap-x-8 z-50">
       <Link
         href={"/shop"}
         className={cn("flex flex-col items-center ", {
