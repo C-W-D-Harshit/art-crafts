@@ -2,6 +2,7 @@ import React from "react";
 import { Button, buttonVariants } from "../ui/button";
 import { HeartIcon } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function ProductCard({ product }: any) {
   return (
@@ -11,18 +12,28 @@ export default function ProductCard({ product }: any) {
           <Button
             variant={"ghost"}
             size={"icon"}
-            className="rounded-full bg-white absolute top-0 right-0 mt-3 mr-3 hover:text-red-500 hover:bg-white ease-in-out duration-700 md:group-hover:flex md:hidden z-20 md:shadow-[0_3px_10px_rgb(0,0,0,0.2)]"
+            className="rounded-full bg-white absolute top-0 right-0 mt-3 mr-3 hover:text-red-500 transition-all hover:bg-white ease-in-out duration-700 md:group-hover:flex md:hidden z-20 md:shadow-[0_3px_10px_rgb(0,0,0,0.2)]"
           >
             <HeartIcon />
           </Button>
+          <Image
+            src={"/dummy/product/bangle.png"}
+            alt={"Product"}
+            fill
+            className="object-contain drop-shadow-md group-hover:scale-105 transition-all ease-in-out duration-700"
+          />
         </div>
       </Link>
       <div className="flex items-center justify-between">
-        <div>
-          <p className="text-lg font-medium">Some Product</p>
-          <p className="text-sm text-slate-500">Brand</p>
+        <div className="w-[65%]">
+          <p className="text-lg font-medium truncate ">
+            Classic Gold Bangle for Kids
+          </p>
+          <p className="text-sm text-slate-500">Kids Wear</p>
         </div>
-        <div className={buttonVariants({ variant: "secondary" })}>₹500</div>
+        <div className={buttonVariants({ variant: "secondary" })}>
+          <p>₹88590</p>
+        </div>
       </div>
     </div>
   );

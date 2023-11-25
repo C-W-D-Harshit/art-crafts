@@ -38,7 +38,8 @@ export default function Hero() {
               src="/pages/home/hero-img.png"
               alt="hero"
               className="object-contain drop-shadow-lg z-0 mt-4 md:mt-5 "
-              layout="fill"
+              fill
+              priority
             />
           </div>
         </div>
