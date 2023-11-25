@@ -9,8 +9,8 @@ export default function TopLoader() {
   const pathname = usePathname();
   const router = useRouter();
   const searchParams = useSearchParams();
-  // React.useEffect(() => {
-  //   NProgress.done();
-  // }, [pathname, router, searchParams]);
+  React.useEffect(() => {
+    NProgress.done();
+  }, [pathname, router, searchParams]);
   return <NextTopLoader showSpinner={false} color="#0f172a" />;
 }
