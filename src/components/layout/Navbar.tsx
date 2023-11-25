@@ -28,18 +28,24 @@ export default function Navbar() {
                     <Button
                       variant={"secondary"}
                       size={"icon"}
-                      className=" hover:text-red-500 duration-500 transition-all"
+                      className=" hover:text-red-500 duration-500 transition-all relative"
                     >
                       <Heart />
+                      <span className="flex items-center justify-center w-[1.2rem] h-[1.2rem] text-white absolute top-[-5px] right-[-2px] bg-red-500 rounded-full text-xs">
+                        6
+                      </span>
                     </Button>
                   </Link>
                   <Link href={"/bag"}>
                     <Button
                       variant={"secondary"}
                       size={"icon"}
-                      className=" hover:text-blue-500 duration-500 transition-all"
+                      className=" hover:text-blue-500 duration-500 transition-all relative"
                     >
                       <ShoppingBag />
+                      <span className="flex items-center justify-center w-[1.2rem] h-[1.2rem] text-white absolute top-[-5px] right-[-2px] bg-blue-500 rounded-full text-xs">
+                        4
+                      </span>
                     </Button>
                   </Link>
                   <Link href={"/account"}>
