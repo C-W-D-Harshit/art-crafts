@@ -4,6 +4,7 @@ import MaxWidthWrapper from "../MaxWidthWrapper";
 import Link from "next/link";
 import { Button } from "../ui/button";
 import { Heart, Search, ShoppingBag, User2 } from "lucide-react";
+import SearchComp from "./SearchComp";
 
 // shadow-[0_3px_10px_rgb(0,0,0,0.2)]
 
@@ -21,14 +22,7 @@ export default function Navbar() {
                 <MenuItems />
               </div>
               <div className="hidden lg:flex items-center gap-x-10">
-                <div className="flex items-center gap-x-3 px-2 py-2 bg-slate-100 rounded-md">
-                  <Search size={"20"} />
-                  <input
-                    type="text"
-                    placeholder="Search"
-                    className=" bg-inherit"
-                  />
-                </div>
+                <SearchComp />
                 <div className="flex items-center gap-x-4">
                   <Link href={"/wishlist"}>
                     <Button
