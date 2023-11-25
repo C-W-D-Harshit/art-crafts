@@ -12,7 +12,7 @@ export default function SearchComp() {
     <form
       onSubmit={(e) => {
         e.preventDefault();
-        router.push(`/new-arrivals?q=${query}`);
+        router.push(`/shop?q=${query}`);
       }}
     >
       <div className="flex items-center gap-x-3 px-2 py-2 bg-slate-100 rounded-md">
