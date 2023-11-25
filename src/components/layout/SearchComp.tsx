@@ -7,11 +7,14 @@ import { useRouter } from "next/navigation";
 export default function SearchComp() {
   const [query, setQuery] = useState("");
   const router = useRouter();
-  const submitHandler = () => {
-    router.push("/shop");
-  };
+
   return (
-    <form onSubmit={() => router.push(`/shop?q=${query}`)}>
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+        router.push(`/new-arrivals?q=${query}`);
+      }}
+    >
       <div className="flex items-center gap-x-3 px-2 py-2 bg-slate-100 rounded-md">
         <Search size={"20"} />
         <input

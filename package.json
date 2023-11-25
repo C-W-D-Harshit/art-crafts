@@ -13,7 +13,7 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
     "lucide-react": "^0.292.0",
-    "next": "14.0.3",
+    "next": "14.0.2",
     "nextjs-toploader": "^1.6.4",
     "nprogress": "^0.2.0",
     "react": "^18",
