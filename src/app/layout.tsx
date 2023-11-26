@@ -7,6 +7,7 @@ import { Toaster } from "react-hot-toast";
 
 import MobBar from "@/components/layout/MobBar";
 import TopLoader from "@/components/loaders/TopLoader";
+import LayoutProvider from "@/providers/LayoutProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,7 +17,7 @@ export const metadata: Metadata = {
     template: "%s | Art & Crafts",
   },
   description: "Developed by the one & only HARSHIT!",
-  metadataBase: new URL("https://arts&craft.cleverdevloper.in"),
+  metadataBase: new URL("https://arts&crafts.cleverdevloper.in"),
   alternates: {
     canonical: "/",
     languages: {
@@ -60,9 +61,7 @@ export default function RootLayout({
             reverseOrder={false}
           />
           <TopLoader />
-          <Navbar />
-          <div className="flex-grow flex-1 ">{children}</div>
-          <MobBar />
+          <LayoutProvider>{children}</LayoutProvider>
         </main>
       </body>
     </html>

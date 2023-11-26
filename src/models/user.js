@@ -41,7 +41,7 @@ const userSchema = new Schema(
     verified: {
       type: Boolean,
       required: true,
-      default: false,
+      default: true,
     },
     verifyKey: Number,
     verifyKeyExpires: Date,
@@ -60,6 +60,22 @@ const userSchema = new Schema(
     timestamps: true,
   }
 );
+
+// Hash the password before saving it to the database
+userSchema.pre("save", function (next) {
+  const user = this;
+  if (!user.isModified("password")) return next();
+
+  bcrypt.genSalt(10, (err, salt) => {
+    if (err) return next(err);
+
+    bcrypt.hash(user.password, salt, (err, hash) => {
+      if (err) return next(err);
+      user.password = hash;
+      next();
+    });
+  });
+});
 
 userSchema.pre("save", async function (next) {
   if (!this.isModified("password") || this.isNew) return next();

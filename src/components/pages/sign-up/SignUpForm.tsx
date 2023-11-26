@@ -12,6 +12,7 @@ import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { FcGoogle } from "react-icons/fc";
+import { signUpAction } from "@/actions/authActions";
 
 export default function SignUpForm() {
   //   const {
@@ -28,15 +29,11 @@ export default function SignUpForm() {
   } = useForm<signupSchema>({
     resolver: zodResolver(signupSchema),
   });
-  const gg = async (email: string, password: string) => {
+  const gg = async (formData: signupSchema) => {
     await new Promise((resolve) => {
       setTimeout(resolve, 200);
     });
-    const result: any = await signIn("credentials", {
-      redirect: false, // Set to false to handle redirect manually
-      email,
-      password,
-    });
+    const result: any = await signUpAction(formData);
     // Check if sign-in was successful
     if (result.error) {
       // Handle sign-in error (display error message, etc.)
@@ -45,14 +42,17 @@ export default function SignUpForm() {
       throw new Error(result.error);
     } else {
       // Sign-in was successful, handle redirect or other actions
+      await signIn("credentials", {
+        redirect: false, // Set to false to handle redirect manually
+        email: formData.email,
+        password: formData.password,
+      });
       router.push("/");
     }
     return result;
   };
 
-  const submitHandler = async (data: loginSchema) => {
-    const { email, password } = data;
-
+  const submitHandler = async (data: signupSchema) => {
     // Define a minimum delay of 0.8 seconds (2000 milliseconds)
     const minimumDelay = 800;
 
@@ -62,7 +62,7 @@ export default function SignUpForm() {
     });
 
     // Trigger the sign-in process
-    const fg: any = gg(email, password);
+    const fg: any = gg(data);
 
     toast.promise(
       fg
@@ -77,13 +77,13 @@ export default function SignUpForm() {
           return Promise.reject(error); // Pass the error to the error callback
         }),
       {
-        loading: "Logging you in...",
+        loading: "Signing you in...",
         error: (error) => {
           // Display the error message using toast.error
           // toast.error(error.message);
           return error.message; // Return the error message
         },
-        success: "Logged In Successfully....",
+        success: "Sign Up Successfully....",
       }
     );
   };
@@ -93,11 +93,9 @@ export default function SignUpForm() {
       const result = await signIn(provider, {
         callbackUrl: process.env.NEXT_PUBLIC_URL,
       });
-      console.log(result);
       toast.loading("Logging in...!");
     } catch (error: any) {
       // Handle errors, possibly by displaying an error message using toast.error() or other means
-      console.error("Login failed:", error);
       toast.error(`Error: ${error.message}`);
     }
   };
@@ -180,7 +178,7 @@ export default function SignUpForm() {
                 />
               </div>
             </div>
-            <Button size={"lg"} className="text-lg">
+            <Button size={"lg"} className="text-lg" type="submit">
               Sign Up
             </Button>
           </div>

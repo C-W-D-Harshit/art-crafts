@@ -93,11 +93,9 @@ export default function LoginForm() {
       const result = await signIn(provider, {
         callbackUrl: process.env.NEXT_PUBLIC_URL,
       });
-      console.log(result);
       toast.loading("Logging in...!");
     } catch (error: any) {
       // Handle errors, possibly by displaying an error message using toast.error() or other means
-      console.error("Login failed:", error);
       toast.error(`Error: ${error.message}`);
     }
   };

@@ -16,7 +16,7 @@ export default function Navbar() {
           <div className="">
             <div className="flex h-16 items-center justify-center lg:justify-between">
               <div className="flex items-center gap-x-20">
-                <Link href="/" className=" font-bold text-3xl">
+                <Link href="/" className=" font-bold text-3xl logo__">
                   Arts & Crafts
                 </Link>
                 <MenuItems />

@@ -1,4 +1,3 @@
-import LoginForm from "@/components/pages/login/LoginForm";
 import SignUpForm from "@/components/pages/sign-up/SignUpForm";
 import React from "react";
 
