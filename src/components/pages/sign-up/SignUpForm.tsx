@@ -73,14 +73,12 @@ export default function SignUpForm() {
         })
         .catch((error: any) => {
           // Handle error and get the error message
-          console.error(error.message);
           return Promise.reject(error); // Pass the error to the error callback
         }),
       {
         loading: "Signing you in...",
         error: (error) => {
           // Display the error message using toast.error
-          // toast.error(error.message);
           return error.message; // Return the error message
         },
         success: "Sign Up Successfully....",
