@@ -80,6 +80,7 @@ export async function createProductAction(body: any) {
 
     product = await Product.create(body);
     revalidatePath("/admin/products");
+    revalidatePath("/shop");
   } catch (error: any) {
     return {
       success: false,
