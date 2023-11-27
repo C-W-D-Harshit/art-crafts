@@ -7,19 +7,16 @@ import ApiFeatures from "@/utils/apiFeatures";
 import { revalidatePath } from "next/cache";
 import cloudinary from "cloudinary";
 
-export const getAdminProducts = async ({ searchParams }: any) => {
+export const getAdminProducts = async (searchParams: any) => {
   try {
     // first connect to the database
     connectMongoDB();
 
-    // get query
-    const query = await QueryMaker(searchParams);
-
     const features = new ApiFeatures(
-      Product.find({
-        status: "published",
-      }).select(" -featuredExpiry -createdAt -updatedAt -description"),
-      query
+      Product.find({}).select(
+        " -featuredExpiry -createdAt -updatedAt -description"
+      ),
+      searchParams
     )
       .filter()
       .sort()
@@ -31,9 +28,17 @@ export const getAdminProducts = async ({ searchParams }: any) => {
     const totalPages =
       totalProducts === 0 ? 0 : Math.ceil(totalProducts / (rpp || 8));
     const numOfResults = products.length;
+    const productsInStore = (await Product.find()).length;
 
     revalidatePath("/admin/products");
-    return { success: true, products, numOfResults, totalPages, totalProducts };
+    return {
+      success: true,
+      products,
+      numOfResults,
+      totalPages,
+      totalProducts,
+      productsInStore,
+    };
   } catch (error: any) {
     return { success: false, error: error.message };
   }
@@ -74,6 +79,7 @@ export async function createProductAction(body: any) {
     body.images = imagesLinks;
 
     product = await Product.create(body);
+    revalidatePath("/admin/products");
   } catch (error: any) {
     return {
       success: false,
@@ -85,3 +91,7 @@ export async function createProductAction(body: any) {
     product,
   };
 }
+
+export const validateQuery = (path: string) => {
+  revalidatePath(path);
+};

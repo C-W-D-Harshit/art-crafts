@@ -149,7 +149,7 @@ export default function Header() {
 
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-4 cursor-pointer">
               <Avatar>
                 <AvatarImage src={userImage} alt="@shadcn" />
                 <AvatarFallback>{userInitials}</AvatarFallback>

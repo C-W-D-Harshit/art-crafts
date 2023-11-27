@@ -3,38 +3,9 @@ import MaxWidthWrapper from "../MaxWidthWrapper";
 import Link from "next/link";
 import { ArrowRight, MoveRightIcon } from "lucide-react";
 import CategoryCard from "../cards/CategoryCard";
+import { categories } from "@/data/category";
 
 export default function CategoryHolder() {
-  const categories = [
-    {
-      name: "Bridal Wear",
-      label: "bridal_wear",
-    },
-    {
-      name: "Casual Wear",
-      label: "casual_wear",
-    },
-    {
-      name: "Engagement",
-      label: "engagement",
-    },
-    {
-      name: "Morden Wear",
-      label: "morden_wear",
-    },
-    {
-      name: "Office Wear",
-      label: "office_wear",
-    },
-    {
-      name: "Traditional & Ethenic Wear",
-      label: "traditional&etenic_wear",
-    },
-    {
-      name: "Kids Wear",
-      label: "kids_wear",
-    },
-  ];
   return (
     <div>
       <MaxWidthWrapper>

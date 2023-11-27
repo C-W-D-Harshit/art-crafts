@@ -1,5 +1,6 @@
 "use client";
 
+import { validateQuery } from "@/actions/productActions";
 import { SearchIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import React, { FormEvent, useState } from "react";
@@ -12,7 +13,8 @@ export default function Search({ searchParams }: any) {
 
   const submitHandler = (e: FormEvent) => {
     e.preventDefault();
-    router.push(`/admin/products?q=${query}`);
+    // validateQuery(`/admin/products`);
+    router.push(`/admin/products?keyword=${query}`);
   };
   return (
     <form

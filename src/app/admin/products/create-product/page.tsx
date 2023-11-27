@@ -39,6 +39,7 @@ import { Separator } from "@/components/ui/separator";
 import Image from "next/image";
 import toast from "react-hot-toast";
 import { createProductAction } from "@/actions/productActions";
+import { categories } from "@/data/category";
 
 export default function Page() {
   const router = useRouter();
@@ -66,36 +67,7 @@ export default function Page() {
     { category: "GST 18%", rate: "18" },
     { category: "GST 28%", rate: "28" },
   ];
-  const categories = [
-    {
-      name: "Bridal Wear",
-      label: "bridal_wear",
-    },
-    {
-      name: "Casual Wear",
-      label: "casual_wear",
-    },
-    {
-      name: "Engagement",
-      label: "engagement",
-    },
-    {
-      name: "Morden Wear",
-      label: "morden_wear",
-    },
-    {
-      name: "Office Wear",
-      label: "office_wear",
-    },
-    {
-      name: "Traditional & Ethenic Wear",
-      label: "traditional&etenic_wear",
-    },
-    {
-      name: "Kids Wear",
-      label: "kids_wear",
-    },
-  ];
+
   // handle add img
   const handleButtonClick = () => {
     // Trigger a click event on the file input using the ref
