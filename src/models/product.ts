@@ -9,7 +9,6 @@ const productSchema = new mongoose.Schema(
       type: String,
       required: [true, "Product name is required."],
       trim: true,
-      unique: true,
     },
     description: {
       type: String,
@@ -51,13 +50,8 @@ const productSchema = new mongoose.Schema(
       type: String,
       required: [true, "Product category is required."],
     },
-    categoryId: {
-      type: mongoose.Schema.Types.ObjectId,
-      required: [true, "Product category is required."],
-      ref: "category",
-    },
     tax: {
-      type: Number,
+      type: String,
       required: [true, "Product tax is required."],
     },
     images: [
@@ -119,8 +113,15 @@ const productSchema = new mongoose.Schema(
       type: String,
       required: [true, "Product status is required."],
       default: "draft",
-      enum: ["draft", "published", "archived"],
+      enum: ["draft", "publish", "archive"],
     },
+    // sizes: [
+    //   {
+    //     type: String,
+    //     required: [true, "Product sizes are required."],
+    //     enum: ["2.2", "2.4", "2.6", "2.8", "2.10", "2.12"],
+    //   },
+    // ],
   },
   {
     timestamps: true, // Use timestamps for createdAt and updatedAt fields

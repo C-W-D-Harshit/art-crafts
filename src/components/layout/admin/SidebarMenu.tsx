@@ -26,7 +26,7 @@ export default function SidebarMenu() {
     {
       icon: <LayoutDashboardIcon />,
       text: "overview",
-      link: "/admin",
+      link: "/admin/index",
     },
 
     {
@@ -63,14 +63,42 @@ export default function SidebarMenu() {
   return (
     <div className="w-full flex flex-col items-center ">
       {data.map((item, index) => {
+        if (path === "/admin") {
+          const pat = "/admin/index";
+          return (
+            <Link
+              href={item.link === "/admin/index" ? "/admin" : item.link}
+              key={index}
+              className={cn(
+                "capitalize font-semibold text-2xl relative py-3 w-full hover:bg-slate-100  ",
+                {
+                  "bg-slate-100": pat.startsWith(item.link),
+                }
+              )}
+            >
+              <div className="px-16 flex items-center gap-3">
+                {item.icon}
+                <p className="">{item.text}</p>
+              </div>
+              <div
+                className={cn(
+                  "absolute right-0 h-full w-2  rounded-tl-lg rounded-bl-lg top-0",
+                  {
+                    "bg-primary": pat === item.link,
+                  }
+                )}
+              />
+            </Link>
+          );
+        }
         return (
           <Link
-            href={item.link}
+            href={item.link === "/admin/index" ? "/admin" : item.link}
             key={index}
             className={cn(
               "capitalize font-semibold text-2xl relative py-3 w-full hover:bg-slate-100  ",
               {
-                "bg-slate-100": path === item.link,
+                "bg-slate-100": path.startsWith(item.link),
               }
             )}
           >
@@ -82,7 +110,7 @@ export default function SidebarMenu() {
               className={cn(
                 "absolute right-0 h-full w-2  rounded-tl-lg rounded-bl-lg top-0",
                 {
-                  "bg-primary": path === item.link,
+                  "bg-primary": path.startsWith(item.link),
                 }
               )}
             />

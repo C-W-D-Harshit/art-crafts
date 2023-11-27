@@ -1,12 +1,16 @@
-import { NextRequest } from "next/server";
-
-async function QueryMaker(req: NextRequest) {
-  const queryParams = req.nextUrl.searchParams;
+async function QueryMaker(
+  searchParams: URLSearchParams | Record<string, string>
+) {
+  // Convert non-URLSearchParams objects to URLSearchParams
+  const params =
+    searchParams instanceof URLSearchParams
+      ? searchParams
+      : new URLSearchParams(searchParams);
 
   // Convert URLSearchParams to a plain JavaScript object
   const queryParamsObject: { [key: string]: string } = {};
 
-  queryParams.forEach((value, key) => {
+  params.forEach((value, key) => {
     queryParamsObject[key] = value;
   });
 

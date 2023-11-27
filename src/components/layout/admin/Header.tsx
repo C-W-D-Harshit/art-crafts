@@ -156,7 +156,7 @@ export default function Header() {
               </Avatar>
               <div className="">
                 <div className="flex items-center gap-2">
-                  <p className="text-xl font-semibold">{userName}</p>
+                  <p className="text-xl font-semibold">{firstName}</p>
                   <ChevronDown size={20} />
                 </div>
                 <p className="text-base font-medium text-slate-500">Admin</p>
