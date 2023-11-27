@@ -22,7 +22,7 @@ export default function Home({
       <ProductHolder
         title="New Arrivals"
         feature="trending_products"
-        link="/new-arivals"
+        link="/new-arrivals"
         searchParams={{ newArrival: true }}
       />
     </main>
