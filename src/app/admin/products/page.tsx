@@ -32,7 +32,7 @@ export default async function page({
             <p>Add Product</p>
           </Link>
         </div>
-        {data.productsInStore !== 0 ? (
+        {data?.productsInStore !== 0 ? (
           <div className="w-full  ">
             <div className="w-full px-12 py-3 bg-primary rounded-md text-white flex justify-between items-center mb-2 gap-4">
               <p className="w-[20%] font-semibold text-lg">Product</p>
@@ -48,7 +48,7 @@ export default async function page({
                 Action
               </p>
             </div>
-            {data.products.map((product: any) => {
+            {data?.products.map((product: any) => {
               return (
                 <div
                   className="w-full px-12 py-3 bg-white text-primary rounded-md flex justify-between items-center mb-2 gap-4"
@@ -105,7 +105,7 @@ export default async function page({
             </p>
           </div>
         )}
-        {data.totalProducts === 0 && (
+        {data?.totalProducts === 0 && (
           <div className="w-full flex items-start justify-center text-2xl font-semibold p-4">
             <p>Opps Product Not Found!</p>
           </div>
