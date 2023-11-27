@@ -3,11 +3,12 @@ import { Button, buttonVariants } from "../ui/button";
 import { HeartIcon } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
+import { getCategoryNameByLabel } from "../../data/category";
 
 export default function ProductCard({ product }: any) {
   return (
     <div className="w-56 min-w-[14rem] md:w-72 md:min-w-[19.15%]  ">
-      <Link href={`/shop/1`}>
+      <Link href={`/shop/${product._id}`}>
         <div className="w-full h-64 md:h-80 relative rounded-md bg-slate-100 group ease-in-out duration-700 mb-4 z-10">
           <Button
             variant={"ghost"}
@@ -17,22 +18,22 @@ export default function ProductCard({ product }: any) {
             <HeartIcon />
           </Button>
           <Image
-            src={"/dummy/product/bangle.png"}
+            src={product.images[0].url}
             alt={"Product"}
             fill
-            className="object-contain drop-shadow-md group-hover:scale-105 transition-all ease-in-out duration-700"
+            className="object-contain drop-shadow-md group-hover:scale-105 transition-all ease-in-out duration-700 p-6"
           />
         </div>
       </Link>
       <div className="flex items-center justify-between">
         <div className="w-[65%]">
-          <p className="text-lg font-medium truncate ">
-            Classic Gold Bangle for Kids
+          <p className="text-lg font-medium truncate ">{product.name}</p>
+          <p className="text-sm text-slate-500">
+            {getCategoryNameByLabel(product.category)}
           </p>
-          <p className="text-sm text-slate-500">Kids Wear</p>
         </div>
         <div className={buttonVariants({ variant: "secondary" })}>
-          <p>₹88590</p>
+          <p>₹{product.price}</p>
         </div>
       </div>
     </div>

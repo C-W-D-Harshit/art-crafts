@@ -95,3 +95,40 @@ export async function createProductAction(body: any) {
 export const validateQuery = (path: string) => {
   revalidatePath(path);
 };
+
+export const getProducts = async (searchParams: any) => {
+  try {
+    // first connect to the database
+    connectMongoDB();
+
+    const features = new ApiFeatures(
+      Product.find({}).select(
+        " -featuredExpiry -createdAt -updatedAt -description"
+      ),
+      searchParams
+    )
+      .filter()
+      .sort()
+      .paginate()
+      .search();
+    const rpp = process.env.RPP as any;
+    const products = await features.query;
+    const totalProducts: number = products.length;
+    const totalPages =
+      totalProducts === 0 ? 0 : Math.ceil(totalProducts / (rpp || 8));
+    const numOfResults = products.length;
+    const productsInStore = (await Product.find()).length;
+
+    revalidatePath("/shop");
+    return {
+      success: true,
+      products,
+      numOfResults,
+      totalPages,
+      totalProducts,
+      productsInStore,
+    };
+  } catch (error: any) {
+    return { success: false, error: error.message };
+  }
+};

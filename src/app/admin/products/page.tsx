@@ -71,8 +71,8 @@ export default async function page({
                   <p className="w-[15%] text-center">{product.stock}</p>
                   <p className="w-[15%] text-center">{product.price}</p>
                   <div className="w-[15%] flex items-center justify-center">
-                    <Badge className="capitalize  text-center">
-                      {product.status}
+                    <Badge className="capitalize text-sm text-center">
+                      {product.status + "ed"}
                     </Badge>
                   </div>
                   <div className="w-[15%] flex items-center justify-center gap-2">
@@ -108,6 +108,11 @@ export default async function page({
         {data.totalProducts === 0 && (
           <div className="w-full flex items-start justify-center text-2xl font-semibold p-4">
             <p>Opps Product Not Found!</p>
+          </div>
+        )}
+        {!data && (
+          <div className="w-full flex items-start justify-center text-2xl font-semibold p-4">
+            <p>Loading plz wait!</p>
           </div>
         )}
       </div>

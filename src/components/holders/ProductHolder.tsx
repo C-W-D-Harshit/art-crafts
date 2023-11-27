@@ -1,17 +1,22 @@
-import React from "react";
+import React, { Suspense } from "react";
 import MaxWidthWrapper from "../MaxWidthWrapper";
 import Link from "next/link";
 import { ArrowRight, MoveRightIcon } from "lucide-react";
 import ProductCard from "../cards/ProductCard";
+import { getProducts } from "@/actions/productActions";
+import ProductHolderComp from "./ProductHolderComp";
+import ProductHolderCompLoading from "./ProductHolderCompLoading";
 
-export default function ProductHolder({
+export default async function ProductHolder({
   title,
   link,
   feature,
+  searchParams,
 }: {
   title: string;
   link: string;
   feature: string;
+  searchParams: any;
 }) {
   return (
     <div>
@@ -27,23 +32,11 @@ export default function ProductHolder({
               <MoveRightIcon size={15} />
             </Link>
           </div>
-          <div className="w-full flex items-center gap-3 md:gap-4 flex-nowrap overflow-x-scroll no-scrollbar">
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-          </div>
+          <Suspense fallback={<ProductHolderCompLoading />}>
+            <ProductHolderComp searchParams={searchParams} />
+          </Suspense>
+          {/* <ProductHolderCompLoading /> */}
+          {/* sd */}
         </div>
       </MaxWidthWrapper>
     </div>
