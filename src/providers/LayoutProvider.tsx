@@ -4,6 +4,10 @@ import MobBar from "@/components/layout/MobBar";
 import Navbar from "@/components/layout/Navbar";
 import { usePathname } from "next/navigation";
 import React from "react";
+import { clsx } from "clsx";
+import Link from "next/link";
+import { cn } from "@/lib/utils";
+import { buttonVariants } from "@/components/ui/button";
 
 export default function LayoutProvider({
   children,
@@ -12,7 +16,17 @@ export default function LayoutProvider({
 }) {
   const path = usePathname();
   if (path.startsWith("/admin")) {
-    return <div className="flex-grow flex-1 ">{children}</div>;
+    return (
+      <>
+        <div className="flex-grow flex-1 hidden lg:flex ">{children}</div>
+        <div className="lg:hidden h-[100dvh] w-full flex items-center justify-center flex-col gap-5">
+          <p className="text-2xl font-bold">Use PC to view this!</p>
+          <Link className={cn(buttonVariants())} href={"/"}>
+            Go Back
+          </Link>
+        </div>
+      </>
+    );
   }
   return (
     <>

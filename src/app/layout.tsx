@@ -8,6 +8,7 @@ import { Toaster } from "react-hot-toast";
 import MobBar from "@/components/layout/MobBar";
 import TopLoader from "@/components/loaders/TopLoader";
 import LayoutProvider from "@/providers/LayoutProvider";
+import AuthSessionProvider from "@/providers/AuthSessionProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -61,7 +62,9 @@ export default function RootLayout({
             reverseOrder={false}
           />
           <TopLoader />
-          <LayoutProvider>{children}</LayoutProvider>
+          <AuthSessionProvider>
+            <LayoutProvider>{children}</LayoutProvider>
+          </AuthSessionProvider>
         </main>
       </body>
     </html>

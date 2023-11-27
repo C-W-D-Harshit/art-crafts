@@ -28,15 +28,16 @@ export default function SidebarMenu() {
       text: "overview",
       link: "/admin",
     },
-    {
-      icon: <ShoppingBag />,
-      text: "orders",
-      link: "/admin/orders",
-    },
+
     {
       icon: <ShoppingBasketIcon />,
       text: "products",
       link: "/admin/products",
+    },
+    {
+      icon: <ShoppingBag />,
+      text: "orders",
+      link: "/admin/orders",
     },
     {
       icon: <UserSquare />,

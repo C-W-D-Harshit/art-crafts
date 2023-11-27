@@ -37,8 +37,6 @@ export default function SignUpForm() {
     // Check if sign-in was successful
     if (result.error) {
       // Handle sign-in error (display error message, etc.)
-      // console.log(result.error);
-      // toast.error(result.error);
       throw new Error(result.error);
     } else {
       // Sign-in was successful, handle redirect or other actions
