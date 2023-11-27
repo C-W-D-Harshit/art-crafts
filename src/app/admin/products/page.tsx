@@ -48,7 +48,7 @@ export default async function page({
                 Action
               </p>
             </div>
-            {data?.products.map((product: any) => {
+            {data?.products?.map((product: any) => {
               return (
                 <div
                   className="w-full px-12 py-3 bg-white text-primary rounded-md flex justify-between items-center mb-2 gap-4"
