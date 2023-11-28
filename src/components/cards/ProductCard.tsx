@@ -8,7 +8,7 @@ import { getCategoryNameByLabel } from "../../data/category";
 export default function ProductCard({ product }: any) {
   return (
     <div className="w-56 min-w-[14rem] md:w-72 md:min-w-[19.15%]  ">
-      <Link href={`/shop/${product._id}`}>
+      <Link href={`/shop/${product.slug}`}>
         <div className="w-full h-64 md:h-80 relative rounded-md bg-slate-100 group ease-in-out duration-700 mb-4 z-10">
           <Button
             variant={"ghost"}

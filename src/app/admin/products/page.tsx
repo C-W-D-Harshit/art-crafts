@@ -1,5 +1,10 @@
-import { getAdminProducts } from "@/actions/productActions";
+import {
+  deleteProductAction,
+  getAdminProducts,
+} from "@/actions/productActions";
+import DeleteBtn from "@/components/pages/admin/product/DeleteBtn";
 import Search from "@/components/pages/admin/product/Search";
+import StatusComp from "@/components/pages/admin/product/Status";
 import { Badge } from "@/components/ui/badge";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -63,7 +68,9 @@ export default async function page({
                         className="object-contain p-2"
                       />
                     </div>
-                    <p className="font-semibold text-lg">{product.name}</p>
+                    <p className="font-semibold text-lg truncate">
+                      {product.name}
+                    </p>
                   </div>
                   <p className="w-[15%] text-center">
                     {getCategoryNameByLabel(product.category)}
@@ -71,23 +78,16 @@ export default async function page({
                   <p className="w-[15%] text-center">{product.stock}</p>
                   <p className="w-[15%] text-center">{product.price}</p>
                   <div className="w-[15%] flex items-center justify-center">
-                    <Badge className="capitalize text-sm text-center">
-                      {product.status + "ed"}
-                    </Badge>
+                    <StatusComp data={JSON.stringify(product)} />
                   </div>
                   <div className="w-[15%] flex items-center justify-center gap-2">
-                    <Link
-                      href={`/admin/products/${product._id}`}
+                    {/* <Button
+                      // href={`/admin/products/${product._id}`}
                       className={cn(buttonVariants(), "p-4")}
                     >
                       <PencilRulerIcon />
-                    </Link>
-                    <Button
-                      variant={"secondary"}
-                      className={cn("text-red-500")}
-                    >
-                      <TrashIcon />
-                    </Button>
+                    </Button> */}
+                    <DeleteBtn id={`${product._id}`} />
                   </div>
                 </div>
               );
@@ -105,7 +105,7 @@ export default async function page({
             </p>
           </div>
         )}
-        {data?.totalProducts === 0 && (
+        {data.productsInStore !== 0 && data?.totalProducts === 0 && (
           <div className="w-full flex items-start justify-center text-2xl font-semibold p-4">
             <p>Opps Product Not Found!</p>
           </div>

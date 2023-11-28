@@ -133,3 +133,73 @@ export const getProducts = async (searchParams: any) => {
     return { success: false, error: error.message };
   }
 };
+
+export const deleteProductAction = async (id: string) => {
+  // connect cloudinary
+  cloudinary.v2.config({
+    cloud_name: process.env.CLOUDINARY_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET,
+  });
+
+  // connect DB
+  await connectMongoDB();
+
+  // create necessary fields
+  let product: any = {};
+  try {
+    product = await Product.findById(id);
+    for (let i = 0; i < product.images.length; i++) {
+      await cloudinary.v2.uploader.destroy(product.images[i].public_id);
+    }
+    product = await Product.findByIdAndDelete(id);
+  } catch (error: any) {
+    return {
+      success: false,
+      message: error.message,
+    };
+  }
+
+  if (!product) {
+    return {
+      success: false,
+      message: "Product not found!",
+    };
+  }
+
+  return {
+    success: true,
+    message: "Product deleted successfully!",
+  };
+};
+
+export const getProductThroughSlug = async (slug: string) => {};
+
+export const updateStatus = async ({
+  id,
+  status,
+}: {
+  id: string;
+  status: string;
+}) => {
+  // connect DB
+  await connectMongoDB();
+
+  try {
+    const product = await Product.findById(id);
+    product.status = status;
+    await product.save();
+    revalidatePath("/admin/products");
+    revalidatePath("/shop");
+    revalidatePath("/");
+    return {
+      success: true,
+      message: "Status updated successfully!",
+    };
+  } catch (error) {
+    return {
+      success: false,
+      message: "Error!",
+    };
+  }
+};

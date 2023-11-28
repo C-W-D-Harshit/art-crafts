@@ -59,7 +59,7 @@ export default function Page() {
   const [images, setImages] = useState<any>([]);
   const [mimg, setMimg] = useState(0);
   const [status, setStatus] = useState<any>("draft");
-  const [featured, setFeatured] = useState(false);
+  const [featured, setFeatured] = useState<any>("");
   const gstRates = [
     { category: "GST 0%", rate: "0" },
     { category: "GST 5%", rate: "5" },
@@ -138,7 +138,7 @@ export default function Page() {
       ...formData,
       images,
       status,
-      featured,
+      featured: featured === "true" ? true : false,
       category: catValue,
       tax: value,
     };
@@ -460,7 +460,7 @@ export default function Page() {
               <Label htmlFor="product_tax" className="text-lg text-slate-700">
                 Featured
               </Label>
-              <Select>
+              <Select onValueChange={(e) => setFeatured(e)}>
                 <SelectTrigger className="w-full border-slate-300 bg-slate-50">
                   <SelectValue placeholder="Select Featured" />
                 </SelectTrigger>
