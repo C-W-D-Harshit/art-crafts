@@ -4,10 +4,16 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { TrashIcon } from "lucide-react";
 import React from "react";
+import toast from "react-hot-toast";
 
 export default function DeleteBtn({ id }: { id: string }) {
   const handleDelete = async (id: string) => {
-    await deleteProductAction(id);
+    const result: any = await deleteProductAction(id);
+    if (result.error) {
+      toast.error(result.error);
+    } else {
+      toast.success(result.message);
+    }
   };
   return (
     <Button

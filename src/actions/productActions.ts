@@ -173,7 +173,27 @@ export const deleteProductAction = async (id: string) => {
   };
 };
 
-export const getProductThroughSlug = async (slug: string) => {};
+export const getProductThroughSlug = async (slug: string) => {
+  // connect DB
+  await connectMongoDB();
+
+  // find product in DB
+  const product = await Product.findOne({
+    slug,
+    status: "publish",
+  });
+
+  if (!product) {
+    return {
+      success: false,
+      message: "Product not found",
+    };
+  }
+  return {
+    success: true,
+    product,
+  };
+};
 
 export const updateStatus = async ({
   id,
