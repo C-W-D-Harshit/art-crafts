@@ -32,7 +32,7 @@ export default function SortBy({
   ];
   return (
     <div className="w-full flex justify-end">
-      <div className="w-56 mb-5">
+      <div className="w-56 mb-8">
         <Popover open={open} onOpenChange={setOpen}>
           <PopoverTrigger asChild>
             <Button

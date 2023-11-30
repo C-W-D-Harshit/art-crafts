@@ -21,7 +21,7 @@ export default async function Page({
 
   if (product === null) {
     const data = await getProductThroughSlug(slug);
-    console.log("data fetched");
+    // console.log("data fetched");
     product = data.product;
   }
 
@@ -31,14 +31,14 @@ export default async function Page({
   let activeSize = searchParams.size
     ? Number(searchParams.size)
     : bangleSizes[0];
-  const filledStars = Math.round(product.ratings);
+  const filledStars = Math.round(product?.ratings);
 
   return (
     <div className="w-full min-h-[100dvh-4rem]">
       <section className="h-full md:h-[94dvh] w-full flex flex-col md:flex-row">
         <div className="w-full md:w-1/2 bg-slate-50 md:h-full flex h-[40dvh]">
           <div className="w-2/6 bg-slate-50 h-full p-5 flex flex-col items-center justify-center gap-4">
-            {product.images.map((image: any, index: number) => {
+            {product?.images.map((image: any, index: number) => {
               return (
                 <Link
                   key={image._id}

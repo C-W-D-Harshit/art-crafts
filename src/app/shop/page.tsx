@@ -17,7 +17,7 @@ export default async function Page({
       <MaxWidthWrapper>
         <div className="w-full">
           <SortBy searchParams={searchParams} />
-          <div className="w-full flex gap-3 md:gap-4 items-center justify-center flex-wrap">
+          <div className="w-full flex gap-6 items-center justify-center flex-wrap">
             {data?.products?.map((product: any, index: number) => {
               return <ProductCard product={product} key={product._id} />;
             })}

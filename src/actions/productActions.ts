@@ -6,6 +6,8 @@ import Product from "@/models/product";
 import ApiFeatures from "@/utils/apiFeatures";
 import { revalidatePath } from "next/cache";
 import cloudinary from "cloudinary";
+import { redis } from "@/lib/redis/redis";
+import { nodeCache } from "@/lib/node-cache/nodeCache";
 
 export const getAdminProducts = async (searchParams: any) => {
   try {
@@ -174,14 +176,24 @@ export const deleteProductAction = async (id: string) => {
 };
 
 export const getProductThroughSlug = async (slug: string) => {
+  let data = null;
+  if (nodeCache.has("product")) {
+    const a: any = nodeCache.get("product");
+    data = JSON.parse(a);
+    console.log("data fetched from cache");
+  }
+  let product: any = data ?? null;
   // connect DB
-  await connectMongoDB();
 
   // find product in DB
-  const product = await Product.findOne({
-    slug,
-    status: "publish",
-  });
+  if (!product) {
+    await connectMongoDB();
+    product = await Product.findOne({
+      slug,
+      status: "publish",
+    });
+    console.log("data fetched");
+  }
 
   if (!product) {
     return {
@@ -189,6 +201,10 @@ export const getProductThroughSlug = async (slug: string) => {
       message: "Product not found",
     };
   }
+  const MAX_AGE = 60_000 * 2; // 1 hour
+  const EXPIRY_MS = `PX`;
+  // await redis.set("product", JSON.stringify(product));
+  nodeCache.set("product", JSON.stringify(product));
   return {
     success: true,
     product,
