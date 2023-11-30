@@ -1,4 +1,6 @@
 import { getProductThroughSlug } from "@/actions/productActions";
+import AddToCart from "@/components/pages/shop/AddToCart";
+import AddToWishlist from "@/components/pages/shop/AddToWishlist";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { getCategoryNameByLabel } from "@/data/category";
 import { bangleSizes } from "@/data/sizes";
@@ -145,17 +147,8 @@ export default async function Page({
             </div>
           </div>
           <div className="my-6 md:my-12 flex items-center gap-6 w-full flex-wrap">
-            <Button className="gap-3 px-5 py-3">
-              <ShoppingBagIcon size={22} />
-              <p className="text-lg">Add to bag</p>
-            </Button>
-            <Button
-              className="gap-3 bg-slate-100 px-5 py-3 border-red-500"
-              variant={"outline"}
-            >
-              <HeartIcon size={22} className="text-red-500" />
-              <p className="text-lg">Add to wishlist</p>
-            </Button>
+            <AddToCart data={JSON.stringify(product)} />
+            <AddToWishlist data={JSON.stringify(product)} />
             <div className={buttonVariants({ variant: "secondary" })}>
               <p className="text-lg">₹ {product.price}</p>
             </div>

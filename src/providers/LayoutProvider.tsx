@@ -3,11 +3,13 @@
 import MobBar from "@/components/layout/MobBar";
 import Navbar from "@/components/layout/Navbar";
 import { usePathname } from "next/navigation";
-import React from "react";
+import React, { useEffect } from "react";
 import { clsx } from "clsx";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
+import useCartStore from "@/store/cart";
+import useWishlistStore from "@/store/wishlist";
 
 export default function LayoutProvider({
   children,
@@ -15,6 +17,10 @@ export default function LayoutProvider({
   children: React.ReactNode;
 }) {
   const path = usePathname();
+  useEffect(() => {
+    useCartStore.persist.rehydrate();
+    useWishlistStore.persist.rehydrate();
+  }, []);
   if (path.startsWith("/admin")) {
     return (
       <>

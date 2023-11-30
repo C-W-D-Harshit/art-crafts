@@ -1,6 +1,9 @@
 "use client";
 
 import { cn } from "@/lib/utils";
+import useCartStore from "@/store/cart";
+import useStore from "@/store/store";
+import useWishlistStore from "@/store/wishlist";
 import {
   HeartIcon,
   HomeIcon,
@@ -14,6 +17,9 @@ import React from "react";
 
 export default function MobBar() {
   const path = usePathname();
+  const cartNo = useStore(useCartStore, (state) => state.cartQuantity) ?? 0;
+  const wishlistNo =
+    useStore(useWishlistStore, (state) => state.wishlistCount) ?? 0;
   return (
     <div className="md:hidden flex justify-center bg-white items-center h-[5rem] sticky bottom-0 w-full shadow-[0_3px_10px_rgb(0,0,0,0.2)] rounded-tl-3xl rounded-tr-3xl px-5 py-4 gap-x-8 z-50">
       <Link
@@ -34,7 +40,7 @@ export default function MobBar() {
         <HeartIcon fontWeight={"400"} />
         <p className="font-semibold text-sm">Wishlist</p>
         <span className="flex items-center justify-center w-[1.2rem] h-[1.2rem] text-white absolute top-[-5px] right-1 bg-red-500 rounded-full text-xs">
-          6
+          {wishlistNo}
         </span>
       </Link>
       <Link
@@ -55,7 +61,7 @@ export default function MobBar() {
         <ShoppingBagIcon fontWeight={"400"} />
         <p className="font-semibold text-sm">Bag</p>
         <span className="flex items-center justify-center w-[1.2rem] h-[1.2rem] text-white absolute top-[-5px] right-[-8px] bg-red-500 rounded-full text-xs">
-          2
+          {cartNo}
         </span>
       </Link>
 
