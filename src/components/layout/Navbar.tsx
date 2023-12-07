@@ -6,6 +6,7 @@ import { Button } from "../ui/button";
 import { Heart, Search, ShoppingBag, User2 } from "lucide-react";
 import SearchComp from "./SearchComp";
 import MenuBtns from "./MenuBtns";
+import Image from "next/image";
 
 // shadow-[0_3px_10px_rgb(0,0,0,0.2)]
 
@@ -17,8 +18,19 @@ export default function Navbar() {
           <div className="">
             <div className="flex h-16 items-center justify-center lg:justify-between">
               <div className="flex items-center gap-x-20">
-                <Link href="/" className=" font-bold text-3xl logo__">
-                  Arts & Crafts
+                <Link
+                  href="/"
+                  className="flex items-center gap-3 font-bold text-3xl logo__"
+                >
+                  <div className="relative h-10 w-10">
+                    <Image
+                      src={"/content/logo/logo.png"}
+                      alt="logo"
+                      fill
+                      className="object-contain rounded-lg"
+                    />
+                  </div>
+                  <div>Arts & Crafts</div>
                 </Link>
                 <MenuItems />
               </div>

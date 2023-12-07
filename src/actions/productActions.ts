@@ -100,22 +100,35 @@ export const validateQuery = (path: string) => {
 };
 
 export const getProducts = async (searchParams: any) => {
+  // let data: any = null;
+  // if (nodeCache.has("products")) {
+  //   const a: any = nodeCache.get("products");
+  //   data = JSON.parse(a);
+  //   console.log("data fetched from cache");
+  // }
+
+  // let products: any = data ?? null;
+  let products: any = null;
   try {
     // first connect to the database
-    connectMongoDB();
+    if (!products) {
+      connectMongoDB();
 
-    const features = new ApiFeatures(
-      Product.find({}).select(
-        " -featuredExpiry -createdAt -updatedAt -description"
-      ),
-      searchParams
-    )
-      .filter()
-      .sort()
-      .paginate()
-      .search();
+      const features = new ApiFeatures(
+        Product.find({}).select(
+          " -featuredExpiry -createdAt -updatedAt -description"
+        ),
+        searchParams
+      )
+        .filter()
+        .sort()
+        .paginate()
+        .search();
+      products = await features.query;
+      console.log("data fetched from db");
+    }
     const rpp = process.env.RPP as any;
-    const products = await features.query;
+    nodeCache.set("products", JSON.stringify(products));
     const totalProducts: number = products.length;
     const totalPages =
       totalProducts === 0 ? 0 : Math.ceil(totalProducts / (rpp || 8));
