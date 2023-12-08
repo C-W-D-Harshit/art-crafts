@@ -22,12 +22,12 @@ export default function Navbar() {
                   href="/"
                   className="flex items-center gap-3 font-bold text-3xl logo__"
                 >
-                  <div className="relative h-10 w-10">
+                  <div className="relative h-10 w-10 overflow-hidden rounded-lg">
                     <Image
                       src={"/content/logo/logo.png"}
                       alt="logo"
                       fill
-                      className="object-contain rounded-lg"
+                      className="object-contain scale-110"
                     />
                   </div>
                   <div>Arts & Crafts</div>
