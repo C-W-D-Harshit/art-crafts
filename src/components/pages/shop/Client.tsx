@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import AddToCart from "@/components/pages/shop/AddToCart";
 import AddToWishlist from "@/components/pages/shop/AddToWishlist";
 import { Button, buttonVariants } from "@/components/ui/button";
@@ -22,12 +22,9 @@ import Link from "next/link";
 
 export default function Client({ produc, searchParams, slug }: any) {
   let product = JSON.parse(produc);
-  let activeImageNumber = searchParams.activeImage
-    ? Number(searchParams.activeImage)
-    : 0;
-  let activeSize = searchParams.size
-    ? Number(searchParams.size)
-    : bangleSizes[0];
+  const [activeImage, setActiveImage] = useState<number>(0);
+  const [activeSize, setActiveSize] = useState<number>(Number(bangleSizes[0]));
+  let activeImageNumber = activeImage;
   const filledStars = Math.round(product?.ratings);
   return (
     <>
@@ -35,18 +32,18 @@ export default function Client({ produc, searchParams, slug }: any) {
         <div className="w-2/6 bg-slate-50 h-full p-5 flex flex-col items-center justify-center gap-4">
           {product?.images.map((image: any, index: number) => {
             return (
-              <Link
+              <div
                 key={image._id}
                 className={cn(
-                  "bg-slate-100 h-16 w-16 relative rounded-md border-slate-500 hover:border-2 transition-all duration-100 ease-in-out",
+                  "bg-slate-100 h-16 w-16 relative rounded-md border-slate-500 hover:border-2 transition-all duration-100 ease-in-out select-none",
                   {
                     "border-2 border-slate-500 p-5":
                       index === activeImageNumber,
                   }
                 )}
-                href={{
-                  pathname: `/shop/${slug}`,
-                  query: { activeImage: index, size: activeSize },
+                onClick={() => {
+                  setActiveImage(index);
+                  console.log("Active image: " + activeImageNumber);
                 }}
               >
                 <Image
@@ -55,7 +52,7 @@ export default function Client({ produc, searchParams, slug }: any) {
                   fill
                   className=" object-contain drop-shadow-2xl"
                 />
-              </Link>
+              </div>
             );
           })}
         </div>
@@ -128,21 +125,18 @@ export default function Client({ produc, searchParams, slug }: any) {
           <div className="flex items-center gap-4 no-scrollbar w-full overflow-x-auto">
             {bangleSizes.map((size, index) => {
               return (
-                <Link
-                  href={{
-                    pathname: `/shop/${slug}`,
-                    query: { size, activeImage: activeImageNumber },
-                  }}
+                <div
+                  onClick={() => setActiveSize(Number(size))}
                   key={index}
                   className={cn(
-                    "flex items-center justify-center p-2 rounded-md bg-slate-50 border-slate-500 w-12 h-12 font-semibold",
+                    "flex items-center justify-center p-2 rounded-md bg-slate-50 border-slate-500 w-12 h-12 font-semibold cursor-pointer",
                     {
                       "border-2 border-slate-500": Number(size) === activeSize,
                     }
                   )}
                 >
                   {size}
-                </Link>
+                </div>
               );
             })}
           </div>
