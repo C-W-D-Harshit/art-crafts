@@ -10,6 +10,7 @@ import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
 import useCartStore from "@/store/cart";
 import useWishlistStore from "@/store/wishlist";
+import Footer from "@/components/layout/Footer";
 
 export default function LayoutProvider({
   children,
@@ -37,7 +38,10 @@ export default function LayoutProvider({
   return (
     <>
       <Navbar />
-      <div className="flex-grow flex-1 ">{children}</div>
+      <div className="flex-grow flex-1 ">
+        {children}
+        <Footer />
+      </div>
       <MobBar />
     </>
   );

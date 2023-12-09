@@ -14,7 +14,7 @@ export default function ContactDetails() {
   const [actName, setActName] = useState(false);
   const [name, setName] = useState(ses?.user.name);
   const [actPhoneNumber, setActPhoneNumber] = useState(false);
-  const [phoneNumber, setPhoneNumber] = useState(9876543210);
+  const [phoneNumber, setPhoneNumber] = useState(ses?.user.phoneNumber);
 
   const updateName = async () => {
     const result: any = await updateUserField({ field: "name", value: name });
@@ -22,6 +22,28 @@ export default function ContactDetails() {
       toast.error(result.error);
     }
     toast.success(result.message);
+  };
+  const updatePhoneNumber = async () => {
+    // Assuming phoneNumber is a string or can be converted to a string
+    const phoneNumberString = String(phoneNumber);
+
+    if (!phoneNumberString || !/^\d{10}$/.test(phoneNumberString)) {
+      toast.error("Invalid phone number");
+      return;
+    }
+
+    const result: any = await updateUserField({
+      field: "phoneNumber",
+      value: phoneNumberString,
+    });
+
+    if (result.error) {
+      toast.error(result.error);
+    } else {
+      update({ phoneNumber });
+      setActPhoneNumber(false);
+      toast.success(result.message);
+    }
   };
   return (
     <div className="w-full">
@@ -83,7 +105,7 @@ export default function ContactDetails() {
           <div className="flex justify-between items-center mb-2">
             <input
               className="min-w-max text-lg font-semibold border border-slate-400 rounded-lg px-3 py-2 bg-slate-50 focus-within:border-primary"
-              defaultValue={ses?.user.phoneNumber ?? 9876543210}
+              defaultValue={ses?.user.phoneNumber}
               onChange={(e) => setPhoneNumber(Number(e.target.value))}
               type="number"
             />
@@ -99,8 +121,7 @@ export default function ContactDetails() {
               <Button
                 size={"icon"}
                 onClick={() => {
-                  update({ name });
-                  setActPhoneNumber(false);
+                  updatePhoneNumber();
                 }}
               >
                 <CheckIcon />

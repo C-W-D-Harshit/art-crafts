@@ -140,6 +140,10 @@ export const authOptions = {
         token.name = session.name;
       }
 
+      if (trigger === "update" && session?.phoneNumber) {
+        token.phoneNumber = session.phoneNumber;
+      }
+
       if (user) {
         // first connect db
         await connectMongoDB();
@@ -155,6 +159,7 @@ export const authOptions = {
           id: user_._id,
           role: user_.role,
           verified: user_.verified,
+          phoneNumber: user_.phoneNumber,
         };
       }
 
@@ -178,6 +183,7 @@ export const authOptions = {
           id: token.id,
           role: token.role,
           verified: token.verified,
+          phoneNumber: token.phoneNumber,
         },
       };
     },
