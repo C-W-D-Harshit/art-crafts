@@ -32,7 +32,7 @@ export default function MobBar() {
         <p className="font-semibold text-sm">Shop</p>
       </Link>
       <Link
-        href={"/wishlist"}
+        href={"/account/wishlist"}
         className={cn("flex flex-col items-center  relative", {
           "text-blue-500": path === "/wishlist",
         })}

@@ -14,7 +14,7 @@ export default function MenuBtns() {
     useStore(useWishlistStore, (state) => state.wishlistCount) ?? 0;
   return (
     <div className="flex items-center gap-x-4">
-      <Link href={"/wishlist"}>
+      <Link href={"/account/wishlist"}>
         <Button
           variant={"secondary"}
           size={"icon"}

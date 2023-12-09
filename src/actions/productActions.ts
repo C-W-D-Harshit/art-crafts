@@ -100,13 +100,6 @@ export const validateQuery = (path: string) => {
 };
 
 export const getProducts = async (searchParams: any) => {
-  // let data: any = null;
-  // if (nodeCache.has("products")) {
-  //   const a: any = nodeCache.get("products");
-  //   data = JSON.parse(a);
-  //   console.log("data fetched from cache");
-  // }
-
   // let products: any = data ?? null;
   let products: any = null;
   try {
@@ -214,9 +207,6 @@ export const getProductThroughSlug = async (slug: string) => {
       message: "Product not found",
     };
   }
-  const MAX_AGE = 60_000 * 2; // 1 hour
-  const EXPIRY_MS = `PX`;
-  // await redis.set("product", JSON.stringify(product));
   nodeCache.set("product", JSON.stringify(product));
   return {
     success: true,
@@ -250,5 +240,32 @@ export const updateStatus = async ({
       success: false,
       message: "Error!",
     };
+  }
+};
+
+export const getProductsByIds = async (productIds: string[]) => {
+  try {
+    // Connect to the database
+    await connectMongoDB();
+
+    // Find products by IDs in the database
+    const products = await Product.find({
+      _id: { $in: productIds },
+      status: "publish",
+    }).select(" -featuredExpiry -createdAt -updatedAt -description");
+
+    if (products.length === 0) {
+      return {
+        success: false,
+        message: "Products not found",
+      };
+    }
+
+    return {
+      success: true,
+      products,
+    };
+  } catch (error: any) {
+    return { success: false, error: error.message };
   }
 };

@@ -43,7 +43,6 @@ export default function Client({ produc, searchParams, slug }: any) {
                 )}
                 onClick={() => {
                   setActiveImage(index);
-                  console.log("Active image: " + activeImageNumber);
                 }}
               >
                 <Image

@@ -3,10 +3,13 @@
 import { Button } from "@/components/ui/button";
 import useWishlistStore from "@/store/wishlist";
 import { HeartIcon } from "lucide-react";
+import { useSession } from "next-auth/react";
 import React, { useState } from "react";
+import toast from "react-hot-toast";
 import { useStore } from "zustand";
 
 export default function AddToWishlist({ data }: any) {
+  const { data: session } = useSession();
   let product = data ? JSON.parse(data) : null;
 
   const wishlistItems = useStore(
@@ -26,12 +29,16 @@ export default function AddToWishlist({ data }: any) {
       variant={"outline"}
       onClick={() => {
         setWish(!wish);
-        if (isProductInWishlist(product._id)) {
-          removeFromWishlist(product._id);
+        if (!session) {
+          toast.error("Please login to add to wishlist!");
         } else {
-          addToWishlist({
-            productId: product._id,
-          });
+          if (isProductInWishlist(product._id)) {
+            removeFromWishlist(product._id);
+          } else {
+            addToWishlist({
+              productId: product._id,
+            });
+          }
         }
       }}
       //   disabled={isProductInWishlist(data.product.id)}

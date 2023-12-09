@@ -11,7 +11,6 @@ export default async function ProductHolder({
   searchParams: any;
 }) {
   const data = await getProducts(searchParams);
-  console.log(searchParams);
   return (
     <div className="w-full flex items-center gap-3 md:gap-4 flex-nowrap overflow-x-scroll no-scrollbar">
       {data?.products?.map((product: any) => {

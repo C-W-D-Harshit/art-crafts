@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 import {
   BriefcaseIcon,
   ChevronRightIcon,
+  HeartIcon,
   LockIcon,
   LogOutIcon,
   User2Icon,
@@ -59,6 +60,11 @@ export default function RootLayout({
       icon: <BriefcaseIcon />,
       link: "/account/orders",
       label: "My Orders",
+    },
+    {
+      icon: <HeartIcon />,
+      link: "/account/wishlist",
+      label: "Wishlist",
     },
   ];
   const logout = async () => {
