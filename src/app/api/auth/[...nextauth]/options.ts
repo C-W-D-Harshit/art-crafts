@@ -136,6 +136,10 @@ export const authOptions = {
         token.role = session.role;
       }
 
+      if (trigger === "update" && session?.name) {
+        token.name = session.name;
+      }
+
       if (user) {
         // first connect db
         await connectMongoDB();

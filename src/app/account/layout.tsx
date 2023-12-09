@@ -154,7 +154,10 @@ export default function RootLayout({
                     key={index}
                     href={item.link}
                     className={cn(
-                      "flex items-center gap-3 rounded-md border border-slate-500 px-3 py-2"
+                      "flex items-center gap-3 rounded-md border border-slate-300 px-3 py-2",
+                      {
+                        "bg-slate-100 border-slate-500": item.link === path,
+                      }
                     )}
                   >
                     {item.icon}
@@ -164,7 +167,7 @@ export default function RootLayout({
               })}
               <div
                 className={cn(
-                  "hidden items-center gap-3 rounded-md border border-slate-500 px-3 py-2",
+                  "hidden items-center gap-3 rounded-md border border-slate-300 px-3 py-2",
                   {
                     flex: ses?.user.role === "admin",
                   }
@@ -177,7 +180,7 @@ export default function RootLayout({
               <div
                 onClick={logout}
                 className={cn(
-                  "flex items-center gap-3 rounded-md border border-slate-500 px-3 py-2"
+                  "flex items-center gap-3 rounded-md border border-slate-300 px-3 py-2"
                 )}
               >
                 <LogOutIcon />
