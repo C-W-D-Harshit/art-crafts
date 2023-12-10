@@ -150,7 +150,7 @@ export default function Page() {
                             }}
                           >
                             <TrashIcon />
-                            <p>Clear Cart</p>
+                            <p>Clear Bag</p>
                           </Button>
                         )}
                       </div>

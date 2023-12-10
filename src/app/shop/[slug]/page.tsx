@@ -2,6 +2,7 @@ import { getProductThroughSlug, getProducts } from "@/actions/productActions";
 import SimilarProductHolder from "@/components/holders/SimilarProductHolder";
 
 import Client from "@/components/pages/shop/Client";
+import { notFound } from "next/navigation";
 
 import React from "react";
 
@@ -26,6 +27,10 @@ export default async function Page({
     const data = await getProductThroughSlug(slug);
     // console.log("data fetched");
     product = data.product;
+  }
+
+  if (!product) {
+    return notFound();
   }
 
   return (
