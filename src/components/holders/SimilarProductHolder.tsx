@@ -17,7 +17,7 @@ export default async function SimilarProductHolder({
   searchParams: any;
 }) {
   return (
-    <div>
+    <div className="mb-12">
       <MaxWidthWrapper>
         <div className="w-full">
           <div className="w-full flex justify-between items-center mb-6">

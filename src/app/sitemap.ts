@@ -5,10 +5,9 @@ export default async function sitemap() {
   const baseUrl = process.env.URL;
 
   //   const data = await getProducts({ status: "publish" });
-  //   console.log(data);
 
   //   const productsUrls =
-  //     data?.products.map((product: any) => {
+  //     data.products?.map((product: any) => {
   //       return {
   //         url: `${baseUrl}/shop/${product.slug}`,
   //         lastModified: new Date(product.updatedAt),
@@ -20,5 +19,6 @@ export default async function sitemap() {
       url: baseUrl,
       lastModified: new Date(),
     },
+    // ...productsUrls,
   ];
 }

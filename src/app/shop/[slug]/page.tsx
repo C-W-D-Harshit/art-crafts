@@ -1,25 +1,17 @@
-import { getProductThroughSlug } from "@/actions/productActions";
+import { getProductThroughSlug, getProducts } from "@/actions/productActions";
 import SimilarProductHolder from "@/components/holders/SimilarProductHolder";
-import AddToCart from "@/components/pages/shop/AddToCart";
-import AddToWishlist from "@/components/pages/shop/AddToWishlist";
+
 import Client from "@/components/pages/shop/Client";
-import { Button, buttonVariants } from "@/components/ui/button";
-import { Separator } from "@/components/ui/separator";
-import { getCategoryNameByLabel } from "@/data/category";
-import { bangleSizes } from "@/data/sizes";
-import { cn } from "@/lib/utils";
-import {
-  ChevronRightIcon,
-  CreditCardIcon,
-  HeartIcon,
-  RecycleIcon,
-  ShirtIcon,
-  ShoppingBagIcon,
-  TruckIcon,
-} from "lucide-react";
-import Image from "next/image";
-import Link from "next/link";
+
 import React from "react";
+
+export async function generateStaticParams() {
+  const data = await getProducts({ status: "publish" });
+
+  return data.products.map((post: any) => ({
+    slug: post.slug,
+  }));
+}
 
 export default async function Page({
   params: { slug },
