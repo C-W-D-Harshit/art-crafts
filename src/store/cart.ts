@@ -42,6 +42,15 @@ const useCartStore = create<CartState>()(
 
             if (existingProductIndex !== -1) {
               // If the product with the same size already exists in the cart, update its quantity and final price
+              if (
+                product.quantity + updatedCart[existingProductIndex].quantity >
+                product.stock
+              ) {
+                console.log("Not enough stock available");
+                toast.error("Not enough stock available");
+                return state; // Prevent further changes to the cart
+              }
+
               updatedCart[existingProductIndex].quantity += product.quantity;
               if (product.finalPrice !== undefined) {
                 updatedCart[existingProductIndex].finalPrice =
@@ -49,12 +58,20 @@ const useCartStore = create<CartState>()(
               }
             } else {
               // Otherwise, add it as a new item
+              if (product.quantity > product.stock) {
+                console.log("Not enough stock available");
+                toast.error("Not enough stock available");
+                return state; // Prevent further changes to the cart
+              }
+
               updatedCart.push(product);
             }
 
-            // Update total price for individual products and calculate the new cartQuantity and cartTotalPrice
+            // Declare newCartQuantity and newCartTotalPrice
             let newCartQuantity = 0;
             let newCartTotalPrice = 0;
+
+            // Update total price for individual products and calculate the newCartQuantity and newCartTotalPrice
             updatedCart.forEach((item) => {
               item.totalPrice = item.quantity * item.price;
               newCartQuantity += item.quantity;
