@@ -22,6 +22,7 @@ interface CartState {
   addToCart: (product: CartProduct) => void;
   removeFromCart: (productId: string) => void;
   clearCart: () => void;
+  decreaseQuantityInCart: (productId: string, size: string) => void;
 }
 
 const useCartStore = create<CartState>()(
@@ -110,6 +111,41 @@ const useCartStore = create<CartState>()(
               cartQuantity: newCartQuantity,
               cartTotalPrice: newCartTotalPrice,
             };
+          });
+        },
+        decreaseQuantityInCart: (productId, size) => {
+          set((state) => {
+            const updatedCart = [...state.cartItems];
+            const existingProductIndex = updatedCart.findIndex(
+              (item) => item.productId === productId && item.size === size
+            );
+
+            if (existingProductIndex !== -1) {
+              // Decrease the quantity by 1, but ensure it doesn't go below 1
+              updatedCart[existingProductIndex].quantity = Math.max(
+                1,
+                updatedCart[existingProductIndex].quantity - 1
+              );
+
+              // Recalculate total price and quantities
+              let newCartQuantity = 0;
+              let newCartTotalPrice = 0;
+              updatedCart.forEach((item) => {
+                item.totalPrice = item.quantity * item.price;
+                newCartQuantity += item.quantity;
+                newCartTotalPrice += item.totalPrice;
+              });
+
+              // Update the state with the modified cart
+              return {
+                cartItems: updatedCart,
+                cartQuantity: newCartQuantity,
+                cartTotalPrice: newCartTotalPrice,
+              };
+            }
+
+            // If the product is not in the cart, return the current state
+            return state;
           });
         },
         clearCart: () => {

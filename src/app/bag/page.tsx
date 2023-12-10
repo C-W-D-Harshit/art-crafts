@@ -29,7 +29,8 @@ export default function Page() {
     (state) => state.cartTotalPrice
   );
 
-  const { addToCart, removeFromCart, clearCart } = useCartStore();
+  const { addToCart, removeFromCart, clearCart, decreaseQuantityInCart } =
+    useCartStore();
   return (
     <div className="w-full min-h-screen">
       <MaxWidthWrapper>
@@ -103,16 +104,21 @@ export default function Page() {
                             <div
                               className="cursor-pointer w-8 h-8 flex justify-center items-center bg-white rounded-full shadow-[rgba(50,_50,_105,_0.15)_0px_2px_5px_0px,_rgba(0,_0,_0,_0.05)_0px_1px_1px_0px]"
                               onClick={() => {
-                                addToCart({
-                                  image: item.image,
-                                  name: item.name,
-                                  price: item.price,
-                                  productId: item.productId,
-                                  quantity: -1,
-                                  size: item.size,
-                                  slug: item.slug,
-                                  stock: item.stock,
-                                });
+                                // addToCart({
+                                //   image: item.image,
+                                //   name: item.name,
+                                //   price: item.price,
+                                //   productId: item.productId,
+                                //   quantity: -1,
+                                //   size: item.size,
+                                //   slug: item.slug,
+                                //   stock: item.stock,
+                                // });
+                                // removeFromCart(item.productId);
+                                decreaseQuantityInCart(
+                                  item.productId,
+                                  item.size
+                                );
                               }}
                             >
                               <MinusIcon size={20} />
