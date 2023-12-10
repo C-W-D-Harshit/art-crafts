@@ -1,17 +1,17 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import { bangleSizes } from "@/data/sizes";
 import useCartStore from "@/store/cart";
 import useWishlistStore from "@/store/wishlist";
 import { ShoppingBagIcon } from "lucide-react";
 import React from "react";
 import toast from "react-hot-toast";
 
-export default function AddToCart({ data }: any) {
+export default function AddToCart({ data, size }: any) {
   let product = data ? JSON.parse(data) : null;
 
   const { addToCart, removeFromCart } = useCartStore();
-  const { addToWishlist, removeFromWishlist } = useWishlistStore();
   let q = 0;
   return (
     <Button
@@ -28,6 +28,7 @@ export default function AddToCart({ data }: any) {
           price: product.price,
           stock: product.stock,
           slug: product.slug,
+          size: `${size}`,
         });
         toast.success("Item added to cart");
       }}

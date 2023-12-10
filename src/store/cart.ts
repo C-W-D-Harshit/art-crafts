@@ -10,6 +10,7 @@ interface CartProduct {
   quantity: number;
   stock: number;
   slug: string;
+  size: string;
   finalPrice?: number | null;
   totalPrice?: number | null;
 }
@@ -34,11 +35,13 @@ const useCartStore = create<CartState>()(
           set((state) => {
             const updatedCart = [...state.cartItems];
             const existingProductIndex = updatedCart.findIndex(
-              (item) => item.productId === product.productId
+              (item) =>
+                item.productId === product.productId &&
+                item.size === product.size
             );
 
             if (existingProductIndex !== -1) {
-              // If the product already exists in the cart, update its quantity and final price
+              // If the product with the same size already exists in the cart, update its quantity and final price
               updatedCart[existingProductIndex].quantity += product.quantity;
               if (product.finalPrice !== undefined) {
                 updatedCart[existingProductIndex].finalPrice =

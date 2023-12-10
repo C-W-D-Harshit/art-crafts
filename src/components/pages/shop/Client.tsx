@@ -141,7 +141,7 @@ export default function Client({ produc, searchParams, slug }: any) {
           </div>
         </div>
         <div className="my-6 md:my-12 flex items-center gap-6 w-full flex-wrap">
-          <AddToCart data={JSON.stringify(product)} />
+          <AddToCart data={JSON.stringify(product)} size={activeSize} />
           <AddToWishlist data={JSON.stringify(product)} />
           <div className={buttonVariants({ variant: "secondary" })}>
             <p className="text-lg">₹ {product.price}</p>

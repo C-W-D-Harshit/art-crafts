@@ -11,6 +11,7 @@ import useCartStore from "@/store/cart";
 import toast from "react-hot-toast";
 import { Separator } from "@/components/ui/separator";
 import Image from "next/image";
+import { bangleSizes } from "@/data/sizes";
 
 export default function Page() {
   const wishlistItems = useStore(
@@ -93,6 +94,7 @@ export default function Page() {
                             price: item.price,
                             stock: item.stock,
                             slug: item.slug,
+                            size: bangleSizes[0],
                           });
                           toast.success("Item added to cart");
                         }}
