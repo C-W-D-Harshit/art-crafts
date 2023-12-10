@@ -108,9 +108,9 @@ export const getProducts = async (searchParams: any) => {
       connectMongoDB();
 
       const features = new ApiFeatures(
-        Product.find({}).select(
-          " -featuredExpiry -createdAt -updatedAt -description"
-        ),
+        Product.find({
+          status: "publish",
+        }).select(" -featuredExpiry -createdAt -updatedAt -description"),
         searchParams
       )
         .filter()
@@ -126,7 +126,11 @@ export const getProducts = async (searchParams: any) => {
     const totalPages =
       totalProducts === 0 ? 0 : Math.ceil(totalProducts / (rpp || 8));
     const numOfResults = products.length;
-    const productsInStore = (await Product.find()).length;
+    const productsInStore = (
+      await Product.find({
+        status: "publish",
+      })
+    ).length;
 
     revalidatePath("/shop");
     return {

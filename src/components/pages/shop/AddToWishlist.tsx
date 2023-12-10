@@ -37,6 +37,11 @@ export default function AddToWishlist({ data }: any) {
           } else {
             addToWishlist({
               productId: product._id,
+              name: product.name,
+              image: product.images[0].url,
+              price: product.price,
+              slug: product.slug,
+              stock: product.stock,
             });
           }
         }

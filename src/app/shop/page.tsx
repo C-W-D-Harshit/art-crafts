@@ -13,7 +13,7 @@ export default async function Page({
 }) {
   const data = await getProducts(searchParams);
   return (
-    <div className="w-full p-5">
+    <div className="w-full p-5 min-h-screen">
       <MaxWidthWrapper>
         <div className="w-full">
           <SortBy searchParams={searchParams} />

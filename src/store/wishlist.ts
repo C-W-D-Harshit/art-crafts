@@ -3,6 +3,11 @@ import { createJSONStorage, devtools, persist } from "zustand/middleware";
 
 interface WishlistProduct {
   productId: string;
+  name: string;
+  image: string;
+  price: number;
+  stock: number;
+  slug: string;
   // You can add more wishlist-specific fields here if needed
 }
 
