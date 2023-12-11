@@ -20,7 +20,7 @@ interface CartState {
   cartQuantity: number;
   cartTotalPrice: number;
   addToCart: (product: CartProduct) => void;
-  removeFromCart: (productId: string) => void;
+  removeFromCart: (productId: string, size: string) => void;
   clearCart: () => void;
   decreaseQuantityInCart: (productId: string, size: string) => void;
 }
@@ -92,10 +92,10 @@ const useCartStore = create<CartState>()(
             };
           });
         },
-        removeFromCart: (productId) => {
+        removeFromCart: (productId, size) => {
           set((state) => {
             const updatedCart = state.cartItems.filter(
-              (item) => item.productId !== productId
+              (item) => item.productId !== productId || item.size !== size
             );
 
             // Calculate the new cartQuantity and cartTotalPrice after removing items

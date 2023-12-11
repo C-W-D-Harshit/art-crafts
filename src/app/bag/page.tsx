@@ -115,10 +115,14 @@ export default function Page() {
                                 //   stock: item.stock
                                 // });
                                 // removeFromCart(item.productId);
-                                decreaseQuantityInCart(
-                                  item.productId,
-                                  item.size
-                                );
+                                if (item.quantity === 1) {
+                                  removeFromCart(item.productId, item.size);
+                                } else {
+                                  decreaseQuantityInCart(
+                                    item.productId,
+                                    item.size
+                                  );
+                                }
                               }}
                             >
                               <MinusIcon size={20} />
