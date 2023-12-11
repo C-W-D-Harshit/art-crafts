@@ -112,7 +112,7 @@ export default function Page() {
                                 //   quantity: -1,
                                 //   size: item.size,
                                 //   slug: item.slug,
-                                //   stock: item.stock,
+                                //   stock: item.stock
                                 // });
                                 // removeFromCart(item.productId);
                                 decreaseQuantityInCart(
