@@ -4,6 +4,7 @@
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
+import { cn } from "@/lib/utils";
 import useCartStore from "@/store/cart";
 import useStore from "@/store/store";
 import {
@@ -192,9 +193,15 @@ export default function Page() {
                       ₹{(cartTotalPrice as number) + 40}
                     </p>
                   </div>
-                  <Button className="w-full text-lg" size={"lg"}>
+                  <Link
+                    href={"/checkout"}
+                    className={cn(
+                      buttonVariants({ size: "lg" }),
+                      "w-full text-lg"
+                    )}
+                  >
                     Proceed to checkout
-                  </Button>
+                  </Link>
                 </div>
               </div>
             </div>

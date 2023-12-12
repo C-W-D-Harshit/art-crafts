@@ -72,8 +72,13 @@ const useCartStore = create<CartState>()(
             let newCartQuantity = 0;
             let newCartTotalPrice = 0;
 
-            // Update total price for individual products and calculate the newCartQuantity and newCartTotalPrice
+            // Calculate the newCartQuantity and newCartTotalPrice
             updatedCart.forEach((item) => {
+              if (item.quantity > item.stock) {
+                console.log("Not enough stock available");
+                toast.error("Not enough stock available");
+                return state; // Prevent further changes to the cart
+              }
               item.totalPrice = item.quantity * item.price;
               newCartQuantity += item.quantity;
               newCartTotalPrice += item.totalPrice;
