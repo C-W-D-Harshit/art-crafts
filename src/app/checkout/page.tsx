@@ -252,15 +252,14 @@ export default function Page() {
                     </div>
                   </div>
                   <Separator className="my-2 md:my-4" />
-                  <div className="w-full flex items-center gap-3 md:gap-6">
-                    <RadioGroupItem value="online" id="online" />
+                  <div className="w-full flex items-center gap-3 md:gap-6 hover:cursor-not-allowed">
+                    <RadioGroupItem value="online" id="online" disabled />
                     <div>
                       <p className="text-lg font-semibold">Pay Online</p>
                       <p>Pay with online with Razorpay Payment gateway.</p>
                     </div>
                   </div>
                 </RadioGroup>
-                <div className="w-full flex items-center"></div>
               </div>
             </div>
           </div>
