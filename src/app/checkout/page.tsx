@@ -17,6 +17,7 @@ import { cn } from "@/lib/utils";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Button } from "@/components/ui/button";
 
 export default function Page() {
   const cartItems = useStore(useCartStore, (state) => state.cartItems);
@@ -263,65 +264,71 @@ export default function Page() {
               </div>
             </div>
           </div>
-          <div className="md:w-[45%] w-full p-6 py-7 h-full border border-slate-300 rounded-lg ">
-            <h3 className="md:text-2xl text-2xl font-semibold">
-              Order Summary
-            </h3>
-            <Separator className="my-6" />
-            <div className="mb-6 w-full">
-              {cartItems?.map((cartItem, index) => (
-                <div key={index} className="w-full mb-3">
-                  <div className="w-full flex justify-between items-center mb-3">
-                    <div className="flex items-center gap-3">
-                      <div className="relative w-24 h-24">
-                        <Image
-                          src={cartItem.image}
-                          alt=""
-                          fill
-                          className="object-contain p-2 rounded-lg bg-slate-100"
-                        />
+
+          <div className="md:w-[45%] w-full">
+            <div className="w-full p-6 py-7 border border-slate-300 rounded-lg ">
+              <h3 className="md:text-2xl text-2xl font-semibold">
+                Order Summary
+              </h3>
+              <Separator className="my-6" />
+              <div className="mb-6 w-full">
+                {cartItems?.map((cartItem, index) => (
+                  <div key={index} className="w-full mb-3">
+                    <div className="w-full flex justify-between items-center mb-3">
+                      <div className="flex items-center gap-3">
+                        <div className="relative w-24 h-24">
+                          <Image
+                            src={cartItem.image}
+                            alt=""
+                            fill
+                            className="object-contain p-2 rounded-lg bg-slate-100"
+                          />
+                        </div>
+                        <div>
+                          <p className="text-lg font-semibold truncate w-32 md:w-48">
+                            {cartItem.name}
+                          </p>
+                          <p className="text-slate-700 font-medium">
+                            <span className="text-base font-semibold text-primary">
+                              Size:{" "}
+                            </span>
+                            {cartItem.size}
+                          </p>
+                          <p className="text-slate-700 font-medium">
+                            <span className="text-base font-semibold text-primary">
+                              Quantity:{" "}
+                            </span>
+                            {cartItem.quantity}
+                          </p>
+                        </div>
                       </div>
-                      <div>
-                        <p className="text-lg font-semibold truncate w-32 md:w-48">
-                          {cartItem.name}
-                        </p>
-                        <p className="text-slate-700 font-medium">
-                          <span className="text-base font-semibold text-primary">
-                            Size:{" "}
-                          </span>
-                          {cartItem.size}
-                        </p>
-                        <p className="text-slate-700 font-medium">
-                          <span className="text-base font-semibold text-primary">
-                            Quantity:{" "}
-                          </span>
-                          {cartItem.quantity}
-                        </p>
-                      </div>
+                      <p className="text-base font-semibold text-slate-600">
+                        ₹{cartItem.price}
+                      </p>
                     </div>
-                    <p className="text-base font-semibold text-slate-600">
-                      ₹{cartItem.price}
-                    </p>
+                    <Separator />
                   </div>
-                  <Separator />
-                </div>
-              ))}
+                ))}
+              </div>
+              <div className="w-full flex items-center justify-between">
+                <p className="font-semibold text-lg">Subtotal</p>
+                <p className="font-medium text-base">₹{cartTotalPrice}</p>
+              </div>
+              <div className="w-full flex items-center justify-between mb-6">
+                <p className="font-semibold text-lg">Delivery</p>
+                <p className="font-medium text-base">₹40</p>
+              </div>
+              <Separator className="mb-6" />
+              <div className="w-full flex items-center justify-between mb-6">
+                <p className="font-semibold text-lg">Total</p>
+                <p className="font-medium text-base">
+                  ₹{(cartTotalPrice as number) + 40}
+                </p>
+              </div>
             </div>
-            <div className="w-full flex items-center justify-between">
-              <p className="font-semibold text-lg">Subtotal</p>
-              <p className="font-medium text-base">₹{cartTotalPrice}</p>
-            </div>
-            <div className="w-full flex items-center justify-between mb-6">
-              <p className="font-semibold text-lg">Delivery</p>
-              <p className="font-medium text-base">₹40</p>
-            </div>
-            <Separator className="mb-6" />
-            <div className="w-full flex items-center justify-between mb-6">
-              <p className="font-semibold text-lg">Total</p>
-              <p className="font-medium text-base">
-                ₹{(cartTotalPrice as number) + 40}
-              </p>
-            </div>
+            <Button type="submit" className="my-6 w-full text-lg" size={"lg"}>
+              Place Order
+            </Button>
           </div>
         </form>
       </MaxWidthWrapper>
