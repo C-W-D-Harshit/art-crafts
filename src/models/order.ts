@@ -9,6 +9,9 @@ interface IProduct extends Document {
   quantity: number;
   ProductID: mongoose.Types.ObjectId;
   size: string;
+  image: string;
+  slug: string;
+  totalPrice: number;
 }
 
 // Define a schema for the product included in the order
@@ -34,6 +37,12 @@ const productSchema = new Schema<IProduct>({
     type: String,
     required: true,
   },
+  image: {
+    type: String,
+    required: true,
+  },
+  slug: String,
+  totalPrice: Number,
 });
 
 // Define a schema for the order
@@ -61,6 +70,7 @@ const orderSchema = new Schema(
       ref: "User", // Reference to a Customer model (assuming you have one)
       required: true,
     },
+    orderTotal: Number,
     customerPhoneNumber: {
       type: Number,
       required: true,
@@ -103,7 +113,7 @@ const orderSchema = new Schema(
     },
     status: {
       type: String,
-      enum: ["pending", "processing", "shipped", "delivered"],
+      enum: ["pending", "processing", "shipped", "delivered", "cancelled"],
       default: "pending",
     },
     shippingAddress: {

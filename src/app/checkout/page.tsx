@@ -31,6 +31,7 @@ export default function Page() {
     useCartStore,
     (state) => state.cartTotalPrice
   );
+  const { clearCart } = useCartStore();
 
   const { data: session, update }: { data: any; update: any } = useSession();
   let ses: any = session;
@@ -66,6 +67,9 @@ export default function Page() {
         name: item.name,
         price: item.price,
         size: item.size,
+        image: item.image,
+        slug: item.slug,
+        totalPrice: item.price * item.quantity,
       };
     });
     const address = {
@@ -78,6 +82,7 @@ export default function Page() {
       customerPhoneNumber,
       products,
       address,
+      orderTotal: cartTotalPrice,
     };
     // console.log(finalData);
     const result = await createOrder(finalData);
@@ -86,9 +91,11 @@ export default function Page() {
       toast.error(result.message);
     } else {
       toast.success(result.message);
-      router.push(
+      router.replace(
         `/order-completed?id=${JSON.parse(result.orderID as string)}`
       );
+      reset();
+      clearCart();
     }
   };
   return (

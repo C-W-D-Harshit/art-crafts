@@ -255,13 +255,12 @@ export const getProductsByIds = async (productIds: string[]) => {
     // Find products by IDs in the database
     const products = await Product.find({
       _id: { $in: productIds },
-      status: "publish",
-    }).select(" -featuredExpiry -createdAt -updatedAt -description");
+    });
 
     if (products.length === 0) {
       return {
         success: false,
-        message: "Products not found",
+        message: "Products not founsd",
       };
     }
 
