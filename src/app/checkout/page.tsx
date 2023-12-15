@@ -18,6 +18,8 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Button } from "@/components/ui/button";
+import { createOrder } from "@/actions/orderActions";
+import toast from "react-hot-toast";
 
 export default function Page() {
   const cartItems = useStore(useCartStore, (state) => state.cartItems);
@@ -55,9 +57,39 @@ export default function Page() {
       phoneNumber: session?.user.phoneNumber ?? "",
     });
   }, [session?.user, reset]);
-  console.log(ses);
   const onSubmit = async (data: addressSchema) => {
-    console.log(data);
+    const customerPhoneNumber = data.phoneNumber;
+    const products = cartItems?.map((item) => {
+      return {
+        ProductID: item.productId,
+        quantity: item.quantity,
+        name: item.name,
+        price: item.price,
+        size: item.size,
+      };
+    });
+    const address = {
+      address: data.address,
+      city: data.city,
+      postalCode: data.postalCode,
+      state: data.state,
+    };
+    const finalData = {
+      customerPhoneNumber,
+      products,
+      address,
+    };
+    // console.log(finalData);
+    const result = await createOrder(finalData);
+    // toast.success(result.message);
+    if (!result.success) {
+      toast.error(result.message);
+    } else {
+      toast.success(result.message);
+      router.push(
+        `/order-completed?id=${JSON.parse(result.orderID as string)}`
+      );
+    }
   };
   return (
     <div className="w-full min-h-screen">
