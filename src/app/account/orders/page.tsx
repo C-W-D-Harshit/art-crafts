@@ -11,8 +11,8 @@ async function OrderCard({ data }: any) {
   return (
     <div className="w-full my-2 gap-5 md:gap-6 flex items-center">
       <div className="w-full flex items-center gap-4 overflow-hidden overflow-x-auto no-scrollbar flex-nowrap">
-        {data?.products?.map((product: any) => (
-          <div key={product.productID} className="flex items-center gap-3">
+        {data?.products?.map((product: any, index: number) => (
+          <div key={index} className="flex items-center gap-3">
             <div className="w-28 h-32 md:w-36 md:h-40 relative p-2 bg-slate-50 rounded-lg">
               <Image
                 src={product.image}
